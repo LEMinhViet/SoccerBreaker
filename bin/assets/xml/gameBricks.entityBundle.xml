@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource>
+	
+	<!-- --------------------------------------------- -->
+	<!-- Exemple de la definition de quelques entitees -->
+	<!-- --------------------------------------------- -->
+	
+	<!-- --------------------------------------------- -->
+	<!-- FLAGS DICTIONNAIRE							   -->
+	<!-- --------------------------------------------- -->
+	<!-- FLAGS = 3 - game buttons 					   --> 		
+	<!-- --------------------------------------------- -->
+	
+	<!-- Definition des alias -->
+	<a name="Transform" class="com.ktm.genome.render.component.Transform" />
+	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
+	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
+	<a name="TextureResource" class="com.ktm.genome.resource.component.TextureResource" />
+	<a name="Controlable" class="components.Controlable" />
+	<a name="Uncontrolable" class="components.Uncontrolable" />
+	<a name="Velocity" class="components.Velocity" />
+	<a name="Obstacle" class="components.Obstacle" />
+	<a name="Touchable" class="components.Touchable" />
+	<a name="Pause" class="components.Pause" />
+	<a name="GameOver" class="components.GameOver" />
+	<a name="LevelCompleted" class="components.LevelCompleted" />
+	<a name="InGameButton" class="components.InGameButton" />	
+		
+	<!-- LES LAYERS ----------------------------------------------------->
+	<!-- Definition d'un Layer qui supporters les resources a afficher -->
+	<e>
+		<Transform />
+		<Layer id="backgroundLayer"	index="0" />
+	</e>
+	
+	<e>
+		<!-- Attributs d'un Transform : -->
+		<!-- 	- x :			abscisse du positionnement de la resource			 -->
+		<!-- 	- y :			ordonnee du positionnement de la resource			 -->
+		<!-- 	- rotation :  	rotation a appliquer a la ressource					 -->
+		<!-- 	- scaleX : 		echelle sur l'axe des X a appliquer a la resource	 -->
+		<!--  	- scaleY : 		echelle sur l'axe des Y a appliquer a la resource	 -->
+		<!-- 	- alpha : 		definit la transparence de la resource				 -->
+		<!-- 	- visible : 	definit si la resource est visible ou pas			 -->
+		<Transform />
+		<!-- Attributs d'un Layer : -->
+		<!-- 	- id : 			identifiant du Layer a renseigne dans les composant  -->
+		<!-- 					Layered pour faire l'association entre un resource   -->
+		<!-- 					et son Layer										 -->
+		<!-- 	- index : 		index du Layer										 -->
+		<Layer id="gameLayer"	index="1" />
+	</e>
+		
+	<e>
+		<Transform x="80" y="400" />
+		<Layer id="ballLayer" index="2" />
+	</e>
+	
+	<e>
+		<Transform />
+		<Layer id="foregroundLayer" index="3" />
+	</e>
+	
+	<e>
+		<Transform />
+		<Layer id="foregroundLayer+1" index="4" />
+	</e>
+	
+	<e>
+		<Transform />
+		<Layer id="foregroundLayer+2" index="5" />
+	</e>
+	
+	<e>
+		<Transform />
+		<Layer id="foregroundLayer+3" index="6" />
+	</e>
+	
+	<!-------------------------------------------------------------------->
+	
+	<!-- Definition d'une ball -->
+	<e>
+		<Transform x="0" y="0" scaleX="0.075" scaleY="0.075" rotation="0" />
+		<TextureResource source="assets/pictures/ball.png" id="ball" />
+		<Layered layerId="ballLayer" />		
+		<Uncontrolable angle="150" /> 
+		<Velocity speed="0"/>
+	</e>	
+	
+	<!-- Definition d'une background -->
+	<e>
+		<Transform />		
+		<TextureResource source="assets/pictures/field_one.png" id="background" />
+		<Layered layerId="backgroundLayer" />		
+	</e>
+	
+	<!-- BORDER ENTITIES ------------------------------------------------------------------>
+	<!-- Definition d'un border -->
+	<e>
+		<Transform x="-20" y="0" />		
+		<Obstacle oWidth="20" oHeight="600" destructible="false" />
+		<Layered layerId="gameLayer" />		
+	</e>
+	
+	<!-- Definition d'un border -->
+	<e>
+		<Transform x="800" y="0" />		
+		<Obstacle oWidth="20" oHeight="600" destructible="false"/>
+		<Layered layerId="gameLayer" />		
+	</e>
+	
+	<!-- Definition d'un border -->
+	<e>
+		<Transform x="0" y="-10" />
+		<Obstacle oWidth="800" oHeight="10" destructible="false"/>
+		<Layered layerId="gameLayer" />		
+	</e>
+	
+	<!-- Definition d'un border -->
+	<!--
+	<e>
+		<Transform x="0" y="600" />		
+		<Obstacle oWidth="800" oHeight="10" destructible="false"/>
+		<Layered layerId="gameLayer" />		
+	</e>
+	-->
+	<!-- BORDER ENTITIES ------------------------------------------------------------------>
+	
+	<!-- Definition d'une brique controlable -->
+	<e>
+		<Transform x="80" y="500" scaleX="0.9" scaleY="0.8" />
+		<!-- Attributs d'un TextureResource :										 -->
+		<!-- 	- id : 			identifiant de la resource							 -->
+		<!--  	- source :		chemin d'acces de l'image a charger					 -->
+		<TextureResource source="assets/pictures/nations/france.png" id="brickFr"	/>
+		<!-- Attributs d'un Layered :			 									 -->
+		<!--  	- layerID : 	identifiant du Layer qui supportera cette resource	 -->
+		<Layered layerId="gameLayer" />
+		<Controlable left="%" right="'" />
+		<Velocity speed="10" accelerationStep="1" />
+		<Obstacle destructible="false" specialPhysic="true" />
+	</e> 	
+	
+	
+	<!-- PAUSE ENTITIES ------------------------------------------------------------------>
+	<e>
+		<Transform x="8" y="8" scaleX="0.5" scaleY="0.5" alpha="0.8" />
+		<TextureResource source = "assets/pictures/pauseButton.png" id="pauseButton" />
+		<Layered layerId="foregroundLayer" />	
+		<Touchable intent="GAME_PAUSE" />
+		<InGameButton />
+	</e>
+	
+	<e>
+		<Transform alpha="0" />		
+		<TextureResource source="assets/pictures/backgroundPause.jpg" id="backgroundPause" />
+		<Layered layerId="foregroundLayer+2" />	
+		<Pause />
+	</e>
+	
+	<e>
+		<Transform x="190" y="150" scaleX="0.6" scaleY="0.6" alpha="0" />		
+		<TextureResource source="assets/pictures/gamePausedTitle.png" id="gamePausedTitle" />
+		<Layered layerId="foregroundLayer+3" />	
+		<Pause />
+	</e>
+	
+	<e>
+		<Transform x="200" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/resumeButton.png" id="resumeButton" />
+		<Layered layerId="foregroundLayer+3" />	
+		<Touchable intent="GAME_RESUME" enabled="false" />
+		<Pause />
+	</e>
+	
+	<e>
+		<Transform x="350" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/resetButton.png" id="resetButton" />
+		<Layered layerId="foregroundLayer+3" />	
+		<Touchable intent="GAME_RESET" enabled="false" />
+		<Pause />
+	</e>
+	
+	<e>
+		<Transform x="500" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/selectLevelButton.png" id="selectLevelButton" />
+		<Layered layerId="foregroundLayer+3" />
+		<Touchable intent="GAME_BACK" enabled="false" />
+		<Pause />
+	</e>
+	<!-- PAUSE ENTITIES ------------------------------------------------------------------>
+	
+	<!-- GAME OVER ENTITIES ------------------------------------------------------------------>
+	<e>
+		<Transform alpha="0" />		
+		<TextureResource source="assets/pictures/backgroundPause.jpg" id="backgroundPause" />
+		<Layered layerId="foregroundLayer+2" />	
+		<GameOver />
+	</e>
+	
+	<e>
+		<Transform x="220" y="150" scaleX="0.6" scaleY="0.6" alpha="0" />		
+		<TextureResource source="assets/pictures/gameOverTitle.png" id="gameOverTitle" />
+		<Layered layerId="foregroundLayer+3" />	
+		<GameOver />
+	</e>
+	
+	<e>
+		<Transform x="250" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/resetButton.png" id="resetButton" />
+		<Layered layerId="foregroundLayer+3" />	
+		<Touchable intent="GAME_RESET" enabled="false" />
+		<GameOver />
+	</e>
+	
+	<e>
+		<Transform x="450" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/selectLevelButton.png" id="selectLevelButton" />
+		<Layered layerId="foregroundLayer+3" />
+		<Touchable intent="GAME_BACK" enabled="false" />
+		<GameOver />
+	</e>
+	<!-- GAME OVER ENTITIES ------------------------------------------------------------------>
+	
+	<!-- LEVEL COMPLETED ENTITIES ------------------------------------------------------------------>
+	<e>
+		<Transform alpha="0" />		
+		<TextureResource source="assets/pictures/backgroundPause.jpg" id="backgroundPause" />
+		<Layered layerId="foregroundLayer+2" />	
+		<LevelCompleted />
+	</e>
+	
+	<e>
+		<Transform x="190" y="150" scaleX="0.6" scaleY="0.6" alpha="0" />		
+		<TextureResource source="assets/pictures/levelCompletedTitle.png" id="levelCompletedTitle" />
+		<Layered layerId="foregroundLayer+3" />	
+		<LevelCompleted />
+	</e>
+	
+	<e>
+		<Transform x="350" y="300" scaleX="0.8" scaleY="0.8" alpha="0" />		
+		<TextureResource source="assets/pictures/nextButton.png" id="nextButton" />
+		<Layered layerId="foregroundLayer+3" />	
+		<Touchable intent="GAME_NEXT" enabled="false" />
+		<LevelCompleted />
+	</e>
+
+	<!-- LEVEL COMPLETED ENTITIES ------------------------------------------------------------------>
+	
+	<!-- INTERFACE ENTITIES ------------------------------------------------------------------>
+	<e>
+		<Transform x="100" y="10" scaleX="0.3" scaleY="0.3" />		
+		<TextureResource source="assets/pictures/scoreTitle.png" id="scoreTitle" />
+		<Layered layerId="foregroundLayer+3" />
+	</e>
+	
+	<e>
+		<Transform x="500" y="10" scaleX="0.3" scaleY="0.3" />		
+		<TextureResource source="assets/pictures/liveTitle.png" id="liveTitle" />
+		<Layered layerId="foregroundLayer+3" />
+	</e>
+	
+	<!-- INTERFACE ENTITIES ------------------------------------------------------------------>
+	
+</resource>

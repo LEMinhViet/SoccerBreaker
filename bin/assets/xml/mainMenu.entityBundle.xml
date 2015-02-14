@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource>
+	
+	<!-- --------------------------------------------- -->
+	<!-- Exemple de la definition de quelques entitees -->
+	<!-- --------------------------------------------- -->
+	
+	<!-- Definition des alias -->
+	<a name="Transform" class="com.ktm.genome.render.component.Transform" />
+	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
+	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
+	<a name="TextureResource" class="com.ktm.genome.resource.component.TextureResource" />
+	<a name="Controlable" class="components.Controlable" />
+	<a name="Uncontrolable" class="components.Uncontrolable" />
+	<a name="Velocity" class="components.Velocity" />
+	<a name="Obstacle" class="components.Obstacle" />
+	<a name="BrickMap" class="components.BrickMap" />
+	<a name="Touchable" class="components.Touchable" />
+	
+		
+	<!-- Definition d'un Layer qui supporters les resources a afficher -->
+	<e>
+		<Transform />
+		<Layer id="backgroundLayer"	index="0" />
+	</e>
+	
+	<e>
+		<!-- Attributs d'un Transform : -->
+		<!-- 	- x :			abscisse du positionnement de la resource			 -->
+		<!-- 	- y :			ordonnee du positionnement de la resource			 -->
+		<!-- 	- rotation :  	rotation a appliquer a la ressource					 -->
+		<!-- 	- scaleX : 		echelle sur l'axe des X a appliquer a la resource	 -->
+		<!--  	- scaleY : 		echelle sur l'axe des Y a appliquer a la resource	 -->
+		<!-- 	- alpha : 		definit la transparence de la resource				 -->
+		<!-- 	- visible : 	definit si la resource est visible ou pas			 -->
+		<Transform />
+		<!-- Attributs d'un Layer : -->
+		<!-- 	- id : 			identifiant du Layer a renseigne dans les composant  -->
+		<!-- 					Layered pour faire l'association entre un resource   -->
+		<!-- 					et son Layer										 -->
+		<!-- 	- index : 		index du Layer										 -->
+		<Layer id="gameLayer"	index="1" />
+	</e>
+		
+	<e>
+		<Transform />
+		<Layer id="foregroundLayer" index="3" />
+	</e>
+	
+	<!-- Definition d'une background -->
+	<e>
+		<Transform />		
+		<TextureResource source="assets/pictures/field_one.png" id="background" />
+		<Layered layerId="backgroundLayer" />		
+	</e>
+	
+	<!-- Definition d'un logo -->
+	<e>
+		<Transform x="100" />		
+		<TextureResource source="assets/pictures/logo.png" id="logo" />
+		<Layered layerId="foregroundLayer" />		
+	</e>
+	
+	<!-- Definition d'une button - START Button -->
+	<e>
+		<Transform x="360" y="300" scaleX="0.8" scaleY="0.8" />
+		<TextureResource source = "assets/pictures/startButton.png" id="startButton" />
+		<Layered layerId="foregroundLayer" />	
+		<Touchable intent="MENU_START" />
+	</e>
+	
+	<!-- Definition d'une button - START Button -->
+	<e>
+		<Transform x="200" y="400" scaleX="0.8" scaleY="0.8" />
+		<TextureResource source = "assets/pictures/highscoreButton.png" id="highscoreButton" />
+		<Layered layerId="foregroundLayer" />	
+		<Touchable intent="MENU_HIGHSCORE" />
+	</e>
+	
+	<!-- Definition d'une button - EXIT Button -->
+	<e>
+		<Transform x="360" y="500" scaleX="0.8" scaleY="0.8" />
+		<TextureResource source = "assets/pictures/exitButton.png" id="exitButton" />
+		<Layered layerId="foregroundLayer" />	
+		<Touchable intent="MENU_EXIT" />
+	</e>
+	
+	
+</resource>
